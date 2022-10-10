@@ -1,0 +1,114 @@
+﻿@using Microsoft.Extensions.Configuration
+@using MsalAuthInMauiBlazor.MsalClient
+@inject IPCAWrapper _pcaWrapper;
+@inject IConfiguration _configuration;
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">MsalAuthInMauiBlazor</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="top-row px-4">
+            @if (IsLoggedIn)
+            {
+                <button class="btn btn-link" @onclick="OnLogoutClicked">Logout</button>
+            }
+            else
+            {
+                <button class="btn btn-link" @onclick="OnLoginClicked">Login</button>
+            }
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="fetchdata">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    bool _isLoggedIn = false;
+    public bool IsLoggedIn
+    {
+        get => _isLoggedIn;
+        set
+        {
+            if (_isLoggedIn == value) return;
+            _isLoggedIn = value;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async void OnLoginClicked()
+    {
+        IsLoggedIn = false;
+
+        try
+        {
+            // Attempt silent login, and obtain access token.
+            var result = await _pcaWrapper.AcquireTokenSilentAsync(_pcaWrapper.Scopes).ConfigureAwait(false);
+
+            // Set access token.
+            Globals.AccessToken = result?.AccessToken;
+            if (Globals.AccessToken != null)
+                IsLoggedIn = true;
+
+        }
+        // A MsalUiRequiredException will be thrown, if this is the first attempt to login, or after logging out.
+        catch (MsalUiRequiredException)
+        {
+            try
+            {
+                // Perform interactive login, and obtain access token.
+                var result = await _pcaWrapper.AcquireTokenInteractiveAsync(_pcaWrapper?.Scopes).ConfigureAwait(false);
+
+                // Set access token.
+                Globals.AccessToken = result?.AccessToken;
+                if (Globals.AccessToken != null)
+                    IsLoggedIn = true;
+            }
+            catch (Exception ex)
+            {
+                // Ignore.
+            }
+        }
+        catch
+        {
+            IsLoggedIn = false;
+        }
+
+    }
+
+    private async void OnLogoutClicked()
+    {
+        await _pcaWrapper.SignOutAsync().ConfigureAwait(false);
+        IsLoggedIn = false;
+        Globals.AccessToken = null;
+    }
+}

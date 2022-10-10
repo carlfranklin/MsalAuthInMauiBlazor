@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureWebApi", "SecureWebApi\SecureWebApi.csproj", "{C71F6B87-3E01-4AFC-8CC6-04F0FF1DE0A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsalAuthInMauiBlazor", "MsalAuthInMauiBlazor\MsalAuthInMauiBlazor.csproj", "{5AB16CBB-D988-4A63-B3D2-504EC251ADEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C71F6B87-3E01-4AFC-8CC6-04F0FF1DE0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C71F6B87-3E01-4AFC-8CC6-04F0FF1DE0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C71F6B87-3E01-4AFC-8CC6-04F0FF1DE0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C71F6B87-3E01-4AFC-8CC6-04F0FF1DE0A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AB16CBB-D988-4A63-B3D2-504EC251ADEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AB16CBB-D988-4A63-B3D2-504EC251ADEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AB16CBB-D988-4A63-B3D2-504EC251ADEC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5AB16CBB-D988-4A63-B3D2-504EC251ADEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AB16CBB-D988-4A63-B3D2-504EC251ADEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AB16CBB-D988-4A63-B3D2-504EC251ADEC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CE0AC610-151A-493F-830B-C048F73C9DDE}
+	EndGlobalSection
+EndGlobal
