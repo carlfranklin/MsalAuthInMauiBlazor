@@ -9,7 +9,7 @@ namespace MsalAuthInMaui.Platforms.Android
     [IntentFilter(new[] { Intent.ActionView },
         Categories = new[] { Intent.CategoryBrowsable, Intent.CategoryDefault },
         DataHost = "auth",
-        DataScheme = "msal8de42124-fb8f-4b38-b3db-a6fd2b013c9f")]
+        DataScheme = "msal{REPLACE-WITH-YOUR-CLIENT-ID}")]
     public class MsalActivity : BrowserTabActivity
     {
     }
